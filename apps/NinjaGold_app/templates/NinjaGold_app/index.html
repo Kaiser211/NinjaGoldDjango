@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Ninja Money</title>
+  <style>
+        
+      div{
+      height: 500px;
+      width: 800px;
+      overflow: auto;
+      border: 2px dashed red;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+     <h2>Your Gold :{{ request.session.gold }}</h2>
+     <fieldset>
+     	<legend>Farm</legend>
+     	<form action="/process/farm"  method="post">
+     		<p>Earns 10-20 golds</p>
+     		{% csrf_token %}
+     		<input type="submit" value="Find_Gold!">
+     	</form>
+      </fieldset>
+
+      <fieldset>
+     	<legend>Cave</legend>
+     	<form action="/process/cave"  method="post">
+     		<p>Earns 5-10 golds</p>
+     		{% csrf_token %}
+     		<input type="submit" value="Find_Gold!">
+     	</form>
+      </fieldset>
+
+      <fieldset>
+     	<legend>House</legend>
+     	<form action="/process/house "  method="post">
+     		<p>Earns 2-5 golds</p>
+     		{% csrf_token %}
+     		<input type="submit" value="Find_Gold!">
+     	</form>
+      </fieldset>
+
+      <fieldset>
+     	<legend>Casino</legend>
+     	<form action="/process/casino "  method="post">
+     		<p>Earns/Takes 0-50 golds</p>
+     		{% csrf_token %}
+     		<input type="submit" value="Find_Gold!">
+     	</form>
+      </fieldset>
+
+   <div>
+   	    {% for x in request.session.activity reversed %}
+   	     {% if "earned" in x %}      
+               <p style="color: green">{{x}}</p>
+          {% else %}  
+               <p style="color: red">{{x}}</p> 
+              
+         {% endif %}     
+        {% endfor %}
+   	
+   </div>
+   <a style="color: blue" href="/clear">Clear Session</a>
+</body>
+</html>
